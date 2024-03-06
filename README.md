@@ -6,5 +6,6 @@ I'm a junior student majoring in digital media technology at Southwest Petroleum
 - 🤔 Currently, I'm learning Unreal Engine
 - 📚 [My Blog](http://fun.xiaoyaostation.xyz "Xiaoyao's Blog")
 
+[![GitHub stats](https://github-readme-stats-k8iy7fqrj-foreverddb.vercel.app/api?username=H-Bole&show_icons=true&bg_color=30,e96443,904e95&title_color=fff&text_color=fff)](https://github.com/H-Bole)
+
 ![Static Badge](https://img.shields.io/badge/%E9%80%8D%E9%81%A5-Happy-rgb(201%2C%2091%2C%200))
-<img align="left" src="https://github-readme-stats.vercel.app/api?username=H-Bole&include_all_commits=true&count_private-true&custom_title=H-Bole'%20GitHub%20Stats&line_height=30&show_icons=true&hide_border=true&bg_color=192133&title_color=efb752&icon_color=efb752&text_color=70bed9">
