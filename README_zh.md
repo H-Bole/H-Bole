@@ -40,6 +40,9 @@
 [![Blender](https://img.shields.io/badge/-Blender-orange?style=flat&logo=Blender&logoColor=white)](#)
 [![Unity](https://img.shields.io/badge/-Unity-black?style=flat&logo=Unity&logoColor=white)](#)
 [![ComfyUI](https://img.shields.io/badge/-ComfyUI-blue?style=flat)](#)
+### 非常精通（开玩笑） 
+[![ChatGPT](https://img.shields.io/badge/-ChatGPT-blue?style=flat)](#)
+
 
 ### 学习中
 [![Python](https://img.shields.io/badge/-Python-777BB4?style=flat&logo=python&logoColor=white)](#)
