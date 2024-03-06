@@ -2,7 +2,7 @@
 
 ### [English](README.md), [中文](README_zh.md)
 # Hello everyone 👋 I'm H-Bole, you can also call me Happy
-[![H-Bole's GitHub stats](https://github-readme-stats.vercel.app/api?username=H-Bole&theme=codeSTACKr&show_icons=true)](https://github.com/H-Bole/github-readme-stats)
+[![H-Bole's GitHub stats](https://github-readme-stats.vercel.app/api?username=H-Bole&theme=codeSTACKr&show_icons=true)](https://github.com/H-Bole)
 
 I'm a junior undergraduate student majoring in Digital Media Technology at Southwest Petroleum University in China.
 - 🔭 I want to learn everything, but I haven't mastered anything yet
