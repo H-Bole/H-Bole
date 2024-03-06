@@ -1,6 +1,6 @@
 ### [English](README.md), [中文](README_zh.md)
 # Hello everyone! 👋 I'm H-Bole, also known as Xiaoyao
-[![H-Bole's GitHub stats](https://github-readme-stats.vercel.app/api?username=H-Bole)](https://github.com/H-Bole/github-readme-stats&theme=codeSTACKr&show_icons=true)
+[![H-Bole's GitHub stats](https://github-readme-stats.vercel.app/api?username=H-Bole&theme=codeSTACKr&show_icons=true)](https://github.com/H-Bole/github-readme-stats)
 
 I'm a junior student majoring in digital media technology at Southwest Petroleum University in China
 - 🔭 I want to learn everything, but I haven't mastered anything yet
