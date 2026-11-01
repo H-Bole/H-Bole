@@ -1,0 +1,89 @@
+name: 更新主页统计与贪吃蛇
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/profile-assets.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-assets
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 检出主页仓库
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: 生成中文浅色统计卡
+        uses: DenverCoder1/github-readme-streak-stats@adbd07609bb771d3510a15ee2f3b31d5fbe5201d # v1
+        with:
+          path: dist/stats-zh-light.svg
+          options: user=H-Bole&locale=zh_Hans&timezone=Asia/Shanghai&hide_border=true&background=FAF8F3&ring=B73D2B&fire=B73D2B&currStreakNum=28251F&sideNums=28251F&currStreakLabel=B73D2B&sideLabels=6C6258&dates=6C6258&stroke=DFD8CD&disable_animations=true
+
+      - name: 生成中文深色统计卡
+        uses: DenverCoder1/github-readme-streak-stats@adbd07609bb771d3510a15ee2f3b31d5fbe5201d # v1
+        with:
+          path: dist/stats-zh-dark.svg
+          options: user=H-Bole&locale=zh_Hans&timezone=Asia/Shanghai&hide_border=true&background=191815&ring=EF896E&fire=EF896E&currStreakNum=F5EFE3&sideNums=F5EFE3&currStreakLabel=EF896E&sideLabels=BDB0A2&dates=BDB0A2&stroke=43392E&disable_animations=true
+
+      - name: 生成英文浅色统计卡
+        uses: DenverCoder1/github-readme-streak-stats@adbd07609bb771d3510a15ee2f3b31d5fbe5201d # v1
+        with:
+          path: dist/stats-en-light.svg
+          options: user=H-Bole&locale=en&timezone=Asia/Shanghai&hide_border=true&background=FAF8F3&ring=B73D2B&fire=B73D2B&currStreakNum=28251F&sideNums=28251F&currStreakLabel=B73D2B&sideLabels=6C6258&dates=6C6258&stroke=DFD8CD&disable_animations=true
+
+      - name: 生成英文深色统计卡
+        uses: DenverCoder1/github-readme-streak-stats@adbd07609bb771d3510a15ee2f3b31d5fbe5201d # v1
+        with:
+          path: dist/stats-en-dark.svg
+          options: user=H-Bole&locale=en&timezone=Asia/Shanghai&hide_border=true&background=191815&ring=EF896E&fire=EF896E&currStreakNum=F5EFE3&sideNums=F5EFE3&currStreakLabel=EF896E&sideLabels=BDB0A2&dates=BDB0A2&stroke=43392E&disable_animations=true
+
+      - name: 生成深浅色贪吃蛇
+        uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
+        with:
+          github_user_name: H-Bole
+          outputs: |
+            dist/snake-light.svg?color_snake=#B73D2B&color_dots=#EEE8DE,#E7B9A9,#D88E76,#C75F45,#B73D2B
+            dist/snake-dark.svg?palette=github-dark&color_snake=#EF896E&color_dots=#2C251F,#56372E,#8A4B3B,#C36A51,#EF896E
+
+      - name: 核验六张图片
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          expected = {'stats-zh-light.svg', 'stats-zh-dark.svg', 'stats-en-light.svg', 'stats-en-dark.svg', 'snake-light.svg', 'snake-dark.svg'}
+          assert {p.name for p in Path('dist').glob('*.svg')} == expected
+          for name in expected:
+              path = Path('dist') / name
+              assert path.stat().st_size > 1000, name
+              assert ET.parse(path).getroot().tag.endswith('svg'), name
+          PY
+
+      - name: 发布到独立图片分支
+        run: |
+          if git ls-remote --exit-code --heads origin output >/dev/null; then
+            git fetch origin output
+            git worktree add --detach ../profile-output FETCH_HEAD
+          else
+            git worktree add --detach ../profile-output
+            git -C ../profile-output switch --orphan output
+          fi
+          cp dist/*.svg ../profile-output/
+          git -C ../profile-output config user.name 'github-actions[bot]'
+          git -C ../profile-output config user.email 'github-actions[bot]@users.noreply.github.com'
+          git -C ../profile-output add stats-*.svg snake-*.svg
+          if git -C ../profile-output diff --cached --quiet; then
+            exit 0
+          fi
+          git -C ../profile-output commit -m '更新主页统计与贪吃蛇'
+          git -C ../profile-output push origin HEAD:output
+
